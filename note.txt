@@ -1,0 +1,74 @@
+ show dbs;
+ use sh1811
+ db.createCollection("users")
+ db.users.insertOne();
+ db.users.insertMany();
+ db.users.insert({})
+ db.users.inset([{},{}])
+ db.users.find();
+ db.users.find({},{})
+ db.users.find({},{_id:0})
+ db.users.find({},{_id:0,age:1})
+ db.users.find({"age":23},{_id:0})
+ db.users.find({"age":{&lt:23}},{_id:0})
+ db.users.find({"age":{&lte:23}},{_id:0})
+ db.users.distinct("age")
+ 
+ 查看 表里面的所有集合
+ 
+      show collections;
+ ----------------------------------
+ db.users.find({"username":/杨/},{_id:0})  //查询名字包含杨的记录
+ 
+ db.users.find({"username":/^杨/},{_id:0})  //查询名字以杨开头的记录
+ 
+ db.users.find({"username":/^杨/,age:18},{_id:0})  //多条件查询
+ 
+ db.users.find({},{_id:0})   //查找所有
+ 
+ db.users.find().limit(2)   //查询前两条数据
+ 
+ db.users.find().limit(2).skipe(3) // 从第四条数据开始查找两条  skipe是从0开始的
+ 
+ db.users.find({},{_id:0}).sort({age:1})  // 年龄升序 排序
+ 
+ db.users.find({},{_id:0}).sort({age:-1})  //降序 排序
+ 
+ db.users.findOne({},{_id:0})  //请求一条数据  ====》 find().limit(1);
+ 
+ db.users.find({"username":"张三","age":12},{_id:0}).count();  //符合条件的数量
+ 
+ 修改
+    db.users.updateOne({"username":"sss"},{$set{"age":18}}) //修改年龄
+    
+    db.users.find({},{_id:0})
+    
+    db.users.find({"username":"王飞龙"},{$inc:{"age":1}}) //年龄自动加 1 $inc:1 $inc: -1
+     
+    show collections; //查看当前数据库下的所有集合
+    db.users.update({"username":"对手"},{$rename:{oldname:newname}})  //修改字段
+    
+    删除
+     db.user.remove({"age":{$lt:22}})  //删除年龄在22岁以下的
+     db.user.remove({}) //删除所有数据
+     
+    五、node + mongodb
+	cnpm i mongodb -D 
+     
+    
+     
+     
+     
+    
+    
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
